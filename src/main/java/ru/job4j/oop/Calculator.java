@@ -4,7 +4,11 @@ public class Calculator {
     private static int x = 5;
 
     public static int minus(int y) {
-        return x - y;
+        return y - x;
+    }
+
+    public static int sum(int y) {
+        return x + y;
     }
 
     public double divide(int y) {
@@ -16,7 +20,7 @@ public class Calculator {
     }
 
     public double sumAllOperation(int y) {
-        return minus(y) + divide(y) + multiply(y);
+        return minus(y) + divide(y) + multiply(y) + sum(y);
     }
 
     public static void main(String[] args) {
