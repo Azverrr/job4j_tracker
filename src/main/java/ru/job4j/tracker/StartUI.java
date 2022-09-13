@@ -7,7 +7,7 @@ public class StartUI {
         boolean run = true;
         while (run) {
             showMenu();
-            System.out.println("Select: ");
+            System.out.print("Select: ");
             int select = Integer.parseInt(scaner.nextLine());
             if (select != 6) {
                 System.out.println("Пользователь выбрал: " + select);
