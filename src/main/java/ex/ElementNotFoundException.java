@@ -1,5 +1,5 @@
 package ex;
 
-public class ElementNotFoundException extends  Exception{
+public class ElementNotFoundException extends  Exception {
 
 }
