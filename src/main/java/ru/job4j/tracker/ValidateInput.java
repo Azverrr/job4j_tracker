@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import jdk.jshell.spi.SPIResolutionException;
-
 public class ValidateInput implements Input {
     private final Output out;
     private final Input in;
