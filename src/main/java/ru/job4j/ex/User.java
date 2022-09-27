@@ -1,4 +1,4 @@
-package ex;
+package ru.job4j.ex;
 
 public class User {
     private String userName;
