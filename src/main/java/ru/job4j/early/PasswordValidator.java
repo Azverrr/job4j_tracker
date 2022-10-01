@@ -27,7 +27,7 @@ public class PasswordValidator {
                 isSymbol = true;
             }
         }
-        if (!isUpCase){
+        if (!isUpCase) {
             return "Пароль должен содержать хотябы один символ в верхнем регистре";
         }
         if (!isLowCase) {
