@@ -17,44 +17,62 @@ class PasswordValidatorTest {
 
     @Test
     void whenPasswordIsShort() {
-        String password = "String";
-        String expected = "Длинна пароля должна быть в диапазоне от 8 до 32 символов";
-        assertThat(PasswordValidator.validate(password)).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    PasswordValidator.validate("Stri!1");
+                });
+        assertThat(exception.getMessage()).isEqualTo("Длинна пароля должна быть в диапазоне от 8 до 32 символов");
     }
 
     @Test
     void whenPasswordIsNotUpCase() {
-        String password = "string1?";
-        String expected = "Пароль должен содержать хотябы один символ в верхнем регистре";
-        assertThat(PasswordValidator.validate(password)).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    PasswordValidator.validate("string!1");
+                });
+        assertThat(exception.getMessage()).isEqualTo("Пароль содержит хотя бы один символ в верхнем регистре");
     }
 
     @Test
     void whenPasswordIsNotLowCase() {
-        String password = "STRING1?";
-        String expected = "Пароль должен содержать хотябы один символ в нижнем регистре";
-        assertThat(PasswordValidator.validate(password)).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    PasswordValidator.validate("STRING!1");
+                });
+        assertThat(exception.getMessage()).isEqualTo("Пароль содержит хотя бы один символ в нижнем регистре");
     }
 
     @Test
     void whenPasswordIsNotDigit() {
-        String password = "Strings?";
-        String expected = "Парль должен содержать хотябы одну цифру";
-        assertThat(PasswordValidator.validate(password)).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    PasswordValidator.validate("Strings!");
+                });
+        assertThat(exception.getMessage()).isEqualTo("Пароль содержит хотя бы одну цифру");
     }
 
     @Test
     void whenPasswordIsNotSymbol() {
-        String password = "Strings11";
-        String expected = "Пароль должен содержать хотябы один символ";
-        assertThat(PasswordValidator.validate(password)).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    PasswordValidator.validate("String12");
+                });
+        assertThat(exception.getMessage()).isEqualTo("Пароль содержит хотя бы один спец. символ");
     }
 
     @Test
     void whenPasswordIsSimple() {
-        String password = "12345fG!1";
-        String expected = "Пароль слишком простой";
-        assertThat(PasswordValidator.validate(password)).isEqualTo(expected);
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    PasswordValidator.validate("12345Aa1!");
+                });
+        assertThat(exception.getMessage()).isEqualTo("Пароль слишком простой");
     }
 
     @Test

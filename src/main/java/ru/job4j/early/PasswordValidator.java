@@ -6,7 +6,7 @@ public class PasswordValidator {
             throw new IllegalArgumentException("Password is null.");
         }
         if (password.length() < 8 || password.length() > 32) {
-            return "Длинна пароля должна быть в диапазоне от 8 до 32 символов";
+            throw new IllegalArgumentException("Длинна пароля должна быть в диапазоне от 8 до 32 символов");
         }
         char[] passwordArray = password.toCharArray();
         boolean isUpCase = false;
@@ -26,23 +26,26 @@ public class PasswordValidator {
             if (!Character.isUpperCase(temp) && !Character.isLowerCase(temp) && !Character.isDigit(temp)) {
                 isSymbol = true;
             }
+            if (isUpCase && isLowCase && isDigit && isSymbol) {
+                break;
+            }
         }
         if (!isUpCase) {
-            return "Пароль должен содержать хотябы один символ в верхнем регистре";
+            throw new IllegalArgumentException("Пароль содержит хотя бы один символ в верхнем регистре");
         }
         if (!isLowCase) {
-            return "Пароль должен содержать хотябы один символ в нижнем регистре";
+            throw new IllegalArgumentException("Пароль содержит хотя бы один символ в нижнем регистре");
         }
         if (!isDigit) {
-            return "Парль должен содержать хотябы одну цифру";
+            throw new IllegalArgumentException("Пароль содержит хотя бы одну цифру");
         }
         if (!isSymbol) {
-            return "Пароль должен содержать хотябы один символ";
+            throw new IllegalArgumentException("Пароль содержит хотя бы один спец. символ");
         }
         String[] wrongContains = new String[] {"qwerty", "12345", "password", "admin", "user"};
         for (String temp : wrongContains) {
             if (password.toLowerCase().contains(temp)) {
-                return "Пароль слишком простой";
+                throw new IllegalArgumentException("Пароль слишком простой");
             }
         }
         return "Валидный пароль";
